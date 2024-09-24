@@ -1,285 +1,71 @@
 <!DOCTYPE html>
-<html>
-  <title>Alvin Alaphat</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alvin Alaphat - Delphi Embed</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script id="delphi-page-script">
+      window.delphi = { ...(window.delphi ?? {}) };
+      window.delphi.page = {
+        config: "fd6693e2-de47-43ce-9523-98923552192b",
+        container: {
+          width: "100%",
+          height: "100%",
+        },
+      };
+    </script>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link
-    rel="shortcut icon"
-    type="image/x-icon"
-    href="./static/images/alvinlogo.jpg"
-  />
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Oswald"
-  />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Open Sans"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
-
-  <style>
-    .fa-github {
-      color: purple;
-    }
-    .fa-facebook-official {
-      color: #3b5998;
-    }
-
-    .fa-instagram {
-      color: #e23578;
-    }
-
-    .fa-twitter {
-      color: #00aced;
-    }
-
-    .fa-soundcloud {
-      color: orange;
-    }
-
-    .fa-spotify {
-      color: green;
-    }
-
-    .fa-linkedin {
-      color: #0f64c5;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: "Oswald";
-    }
-
-    body {
-      font-family: "Open Sans";
-    }
-  </style>
-
-  <body class="w3-light-grey">
-    <div>
-      <!-- Header -->
-      <!-- <header class="w3-container w3-center w3-padding-48 w3-white">
-        <h1 class="w3-xxxlarge"><b>Alvin Alaphat</b></h1>
-      </header> -->
-
-      <!-- PARROT -->
-      <!-- <div style="position: relative; width: 100%; height: 800px;"><iframe style="width: 100%; height: 100%;" src="https://venturegpt.ndventurecapital.com/ask/Alvin" allow="clipboard-write; clipboard-read;" frameborder="0"></iframe></div> -->
-
-      <!-- DELPHI EMBED -->
-
-      <script id="delphi-page-script">
-        window.delphi = { ...(window.delphi ?? {}) };
-        window.delphi.page = {
-          config: "fd6693e2-de47-43ce-9523-98923552192b",
-          container: {
-            width: "100%",
-            height: "100%",
-          },
-        };
-      </script>
-
-      <script>
-        (function () {
-          var r = window;
-          var a = document;
-          var e = function () {
-            if (
-              !r.delphi ||
-              (typeof r.delphi?.bubble === "undefined" &&
-                typeof r.delphi?.page === "undefined")
-            ) {
+    <script>
+      (function () {
+        var r = window;
+        var a = document;
+        var e = function () {
+          if (
+            !r.delphi ||
+            (typeof r.delphi?.bubble === "undefined" &&
+              typeof r.delphi?.page === "undefined")
+          ) {
+            throw new Error(
+              "Invalid or missing delphi object. Must have a 'bubble' or 'page' property."
+            );
+          }
+          if (r.delphi.page && !a.getElementById("delphi-container")) {
+            var t = a.createElement("script");
+            t.src = "https://embed.delphi.ai/bundle.js";
+            t.type = "text/javascript";
+            t["async"] = true;
+            t.defer = true;
+            if (r?.delphi?.page?.config) {
+              t.setAttribute("data-config", r.delphi.page.config);
+            }
+            var i = a.getElementById("delphi-page-script");
+            if (!i) {
               throw new Error(
-                "Invalid or missing delphi object. Must have a 'bubble' or 'page' property."
+                "Script tag with id 'delphi-page-script' not found."
               );
             }
-            if (
-              r.delphi.bubble &&
-              !a.getElementById("delphi-bubble-container")
-            ) {
-              var e = a.createElement("script");
-              e.src = "https://embed.delphi.ai/widget.js";
-              e.type = "text/javascript";
-              e["async"] = true;
-              e.defer = true;
-              if (r?.delphi?.bubble?.config) {
-                e.setAttribute("data-config", r.delphi.bubble.config);
-              }
-              var i = a.getElementById("delphi-bubble-script");
-              if (!i) {
-                throw new Error(
-                  "Script tag with id 'delphi-bubble-script' not found."
-                );
-              }
-              i.parentNode.insertBefore(e, i);
-            }
-            if (r.delphi.page && !a.getElementById("delphi-container")) {
-              var t = a.createElement("script");
-              t.src = "https://embed.delphi.ai/bundle.js";
-              t.type = "text/javascript";
-              t["async"] = true;
-              t.defer = true;
-              if (r?.delphi?.page?.config) {
-                t.setAttribute("data-config", r.delphi.page.config);
-              }
-              var i = a.getElementById("delphi-page-script");
-              if (!i) {
-                throw new Error(
-                  "Script tag with id 'delphi-page-script' not found."
-                );
-              }
-              i.parentNode.insertBefore(t, i);
-            }
-          };
-          if (a.readyState === "complete") {
-            e();
-          } else if (r.attachEvent) {
-            r.attachEvent("onload", e);
-          } else {
-            r.addEventListener("load", e, false);
+            i.parentNode.insertBefore(t, i);
           }
-        })();
-      </script>
-
-      <!-- DELPHI CHAT BUBBLE -->
-      <!-- <script id="delphi-script">
-        window.delphi = {
-          config: "1f66dbbf-a7b3-453e-ad28-633d0e924b18",
-          type: "bubble",
         };
-      </script>
-
-      <script>
-        !(function () {
-          var e = window,
-            t = document,
-            n = function () {
-              if (
-                !e.delphi ||
-                ("page" !== e.delphi.type && "bubble" !== e.delphi.type)
-              )
-                throw new Error(
-                  "Invalid or missing delphi type. Must be 'page' or 'bubble'."
-                );
-              var n = t.createElement("script");
-              (n.type = "text/javascript"),
-                (n.async = !0),
-                (n.defer = !0),
-                (n.src =
-                  "page" === e.delphi.type
-                    ? "https://embed.delphi.ai/bundle.js"
-                    : "https://embed.delphi.ai/widget.js"),
-                e.delphi &&
-                  e.delphi.config &&
-                  n.setAttribute("data-config", e.delphi.config);
-              var i = t.getElementById("delphi-script");
-              if (!i)
-                throw new Error(
-                  "Script tag with id 'delphi-script' not found."
-                );
-              i.parentNode.insertBefore(n, i);
-            };
-          "complete" === t.readyState
-            ? n()
-            : e.attachEvent
-            ? e.attachEvent("onload", n)
-            : e.addEventListener("load", n, !1);
-        })();
-      </script> -->
-
-      <!-- <div
-        class="w3-display-container w3-wide"
-        id="home"
-        style="position: relative"
-      >
-        <div style="width: fit-content; filter: grayscale(100%)">
-          <img
-            class="w3-image mySlides w3-animate-right"
-            src="./static/images/sf.png"
-            alt="sf"
-          />
-          <img
-            class="w3-image mySlides w3-animate-right"
-            src="./static/images/tedx.jpg"
-            alt="tedx"
-          />
-          <img
-            class="w3-image mySlides w3-animate-right"
-            src="./static/images/santa.jpg"
-            alt="santa"
-          />
-          <img
-            class="w3-image mySlides w3-animate-right"
-            src="./static/images/hill.jpg"
-            alt="hill"
-          />
-          <img
-            class="w3-image mySlides w3-animate-right"
-            src="./static/images/carmel.jpg"
-            alt="carmel"
-          />
-          <img
-            class="w3-image mySlides w3-animate-right"
-            src="./static/images/friends.JPG"
-            alt="friends"
-          />
-          <img
-            class="w3-image mySlides w3-animate-right"
-            src="./static/images/fam.jpg"
-            alt="fam"
-          />
-        </div>
-        <div class="w3-display-left w3-padding-large">
-          <br /><br /><br /><br />
-          <h1 class="w3-text-white">Alvin Alaphat</h1>
-          <h1
-            class="w3-jumbo myTextSlide w3-animate-right w3-text-white w3-hide-small"
-          >
-            <b></b>
-          </h1>
-          <h1
-            class="w3-jumbo myTextSlide w3-animate-right w3-text-white w3-hide-small"
-          >
-            <b></b>
-          </h1>
-          <h1
-            class="w3-jumbo myTextSlide w3-animate-right w3-text-white w3-hide-small"
-          >
-            <b></b>
-          </h1>
-          <h1
-            class="w3-jumbo myTextSlide w3-animate-right w3-text-white w3-hide-small"
-          >
-            <b></b>
-          </h1>
-          <h1
-            class="w3-jumbo myTextSlide w3-animate-right w3-text-white w3-hide-small"
-          >
-            <b></b>
-          </h1>
-          <h1
-            class="w3-jumbo myTextSlide w3-animate-right w3-text-white w3-hide-small"
-          >
-            <b></b>
-          </h1>
-          <h1
-            class="w3-jumbo myTextSlide w3-animate-right w3-text-white w3-hide-small"
-          >
-            <b></b>
-          </h1>
-        </div>
-      </div> -->
-
-      <!-- Grid -->
-    </div>
+        if (a.readyState === "complete") {
+          e();
+        } else if (r.attachEvent) {
+          r.attachEvent("onload", e);
+        } else {
+          r.addEventListener("load", e, false);
+        }
+      })();
+    </script>
   </body>
 </html>
